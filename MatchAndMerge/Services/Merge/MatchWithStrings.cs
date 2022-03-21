@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MatchAndMerge.Services.Merge {
     public class MatchWithStrings : MergeService {
+
+        public MatchWithStrings() { }
         public MatchWithStrings(List<string> fragments) : base(fragments) { }
 
-        protected override (int, int) FindOverlap(string fragment1, string fragment2) {
+        public override (int, int) FindOverlap(string fragment1, string fragment2) {
             if (fragment1.IndexOf(fragment2) > 0)
                 return (0, 0);
 

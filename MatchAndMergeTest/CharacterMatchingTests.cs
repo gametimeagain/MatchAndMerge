@@ -1,8 +1,6 @@
 ﻿using MatchAndMerge.DataLayer;
 using MatchAndMerge.Services.Merge;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
 
 namespace MatchAndMergeTest {
     [TestClass]
@@ -11,14 +9,36 @@ namespace MatchAndMergeTest {
         private readonly DataRepository _fileManager;
         private MatchWithChars _mergeService;
 
+        private readonly string rootPath = @"..\..\Data\";
+
         public CharacterMatchngTests() {
             _fileManager = new();
         }
 
         [TestMethod]
+        public void TestOverlap() {
+            string fragment1 = "all is well";
+            string fragment2 = "s well th";
+
+            _mergeService = new();
+            (int overlap, _) = _mergeService.FindOverlap(fragment1, fragment2);
+            Assert.AreEqual(overlap, 6);
+        }
+
+        [TestMethod]
+        public void TestNoOverlap() {
+            string fragment1 = "s well th";
+            string fragment2 = "all is well";
+
+            _mergeService = new();
+            (int overlap, _) = _mergeService.FindOverlap(fragment1, fragment2);
+            Assert.AreEqual(overlap, 0);
+        }
+
+        [TestMethod]
         public void Assignment() {
-            var fragment = _fileManager.LoadFragmentData(@"Data\Fragments\Assignment.txt");
-            string expected = _fileManager.LoadRawData(@"Data\Expected\Assignment.txt");
+            var fragment = _fileManager.LoadFragmentDataFromFile(@$"{rootPath}\Fragments\Assignment.txt");
+            string expected = _fileManager.LoadRawData(@$"{rootPath}\Expected\Assignment.txt");
 
             _mergeService = new(fragment);
             string result = _mergeService.ReassembleFragments();
@@ -27,8 +47,8 @@ namespace MatchAndMergeTest {
 
         [TestMethod]
         public void AllOverlap() {
-            var fragment = _fileManager.LoadFragmentData(@"Data\Fragments\AllOverlap.txt");
-            string expected = _fileManager.LoadRawData(@"Data\Expected\AllOverlap.txt");
+            var fragment = _fileManager.LoadFragmentDataFromFile(@$"{rootPath}\Fragments\AllOverlap.txt");
+            string expected = _fileManager.LoadRawData(@$"{rootPath}\Expected\AllOverlap.txt");
 
             _mergeService = new(fragment);
             string result = _mergeService.ReassembleFragments();
@@ -37,8 +57,8 @@ namespace MatchAndMergeTest {
 
         [TestMethod]
         public void NoOverlap() {
-            var fragment = _fileManager.LoadFragmentData(@"Data\Fragments\NoOverlap.txt");
-            string expected = _fileManager.LoadRawData(@"Data\Expected\NoOverlap.txt");
+            var fragment = _fileManager.LoadFragmentDataFromFile(@$"{rootPath}\Fragments\NoOverlap.txt");
+            string expected = _fileManager.LoadRawData(@$"{rootPath}\Expected\NoOverlap.txt");
 
             _mergeService = new(fragment);
             string result = _mergeService.ReassembleFragments();
@@ -47,8 +67,8 @@ namespace MatchAndMergeTest {
 
         [TestMethod]
         public void RandomOrder() {
-            var fragment = _fileManager.LoadFragmentData(@"Data\Fragments\RandomOrder.txt");
-            string expected = _fileManager.LoadRawData(@"Data\Expected\RandomOrder.txt");
+            var fragment = _fileManager.LoadFragmentDataFromFile(@$"{rootPath}\Fragments\RandomOrder.txt");
+            string expected = _fileManager.LoadRawData(@$"{rootPath}\Expected\RandomOrder.txt");
 
             _mergeService = new(fragment);
             string result = _mergeService.ReassembleFragments();
@@ -57,12 +77,13 @@ namespace MatchAndMergeTest {
 
         [TestMethod]
         public void SomeOverlap() {
-            var fragment = _fileManager.LoadFragmentData(@"Data\Fragments\SomeOverlap.txt");
-            string expected = _fileManager.LoadRawData(@"Data\Expected\SomeOverlapChar.txt");
+            var fragment = _fileManager.LoadFragmentDataFromFile(@$"{rootPath}\Fragments\SomeOverlap.txt");
+            string expected = _fileManager.LoadRawData(@$"{rootPath}\Expected\SomeOverlapChar.txt");
 
             _mergeService = new(fragment);
             string result = _mergeService.ReassembleFragments();
             Assert.AreEqual(expected, result);
         }
+
     }
 }

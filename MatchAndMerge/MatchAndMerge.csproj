@@ -55,5 +55,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\Expected\AllOverlap.txt" />
+    <Content Include="Data\Expected\Assignment.txt" />
+    <Content Include="Data\Expected\NoOverlap.txt" />
+    <Content Include="Data\Expected\RandomOrder.txt" />
+    <Content Include="Data\Expected\SomeOverlapChar.txt" />
+    <Content Include="Data\Expected\SomeOverlapString.txt" />
+    <Content Include="Data\Fragments\AllOverlap.txt" />
+    <Content Include="Data\Fragments\Assignment.txt" />
+    <Content Include="Data\Fragments\NoOverlap.txt" />
+    <Content Include="Data\Fragments\RandomOrder.txt" />
+    <Content Include="Data\Fragments\SomeOverlap.txt" />
+    <Content Include="Data\Original\AllOverlap.txt" />
+    <Content Include="Data\Original\Assignment.txt" />
+    <Content Include="Data\Original\NoOverlap.txt" />
+    <Content Include="Data\Original\RandomOrder.txt" />
+    <Content Include="Data\Original\SomeOverlap.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

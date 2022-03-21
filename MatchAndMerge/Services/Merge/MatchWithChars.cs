@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MatchAndMerge.Services.Merge {
     public class MatchWithChars : MergeService {
+
+        public MatchWithChars() { }
         public MatchWithChars(List<string> fragments) : base(fragments) { }
 
-        protected override (int, int) FindOverlap(string fragment1, string fragment2) {
+        public override (int, int) FindOverlap(string fragment1, string fragment2) {
             char[] charArray1 = fragment1.ToArray();
             char[] charArray2 = fragment2.ToArray();
 

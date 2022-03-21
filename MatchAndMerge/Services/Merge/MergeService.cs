@@ -6,10 +6,12 @@ namespace MatchAndMerge.Services.Merge {
 
     public abstract class MergeService {
 
-        public int MinimumOverlap { get; set; } = 2;
+        public int MinimumOverlap { get; set; } = 1;
 
         protected List<string> _fragments;
         protected readonly List<FragmentIndex> _overlapIndex = new();
+
+        public MergeService() {}
 
         public MergeService(List<string> fragments) {
             _fragments = fragments;
@@ -42,7 +44,7 @@ namespace MatchAndMerge.Services.Merge {
             }
         }
 
-        abstract protected (int, int) FindOverlap(string fragment1, string fragment2);
+        abstract public (int, int) FindOverlap(string fragment1, string fragment2);
 
         private void MergeLargestOverlap() {
             if (_overlapIndex.Count == 0) {
